@@ -3,7 +3,8 @@ namespace Interpolation
 open System
 
 module StreamProcessor =
-    let private methodName = function
+    let private methodName =
+        function
         | InterpolationMethod.Linear -> "linear"
         | InterpolationMethod.Lagrange -> "lagrange"
         | InterpolationMethod.Newton -> "newton"
@@ -11,17 +12,24 @@ module StreamProcessor =
 
     let private nearestWindow (size: int) (points: Point list) (x: float) : Point list =
         let sorted = points |> List.sortBy (fun p -> p.X)
-        if sorted.Length <= size then sorted
+
+        if sorted.Length <= size then
+            sorted
         else
             let arr = sorted |> List.toArray
             let len = arr.Length
+
             let idx =
                 let mutable k = len - 1
+
                 for i in 0 .. len - 1 do
-                    if arr.[i].X >= x && i < k then k <- i
+                    if arr.[i].X >= x && i < k then
+                        k <- i
+
                 k
 
             let half = size / 2
+
             let start =
                 idx - half
                 |> fun s -> Math.Max(s, 0)
@@ -29,7 +37,12 @@ module StreamProcessor =
 
             arr.[start .. start + size - 1] |> Array.toList
 
-    let private interpolate (config: Config) (points: Point list) (x: float) (method_: InterpolationMethod) : float option =
+    let private interpolate
+        (config: Config)
+        (points: Point list)
+        (x: float)
+        (method_: InterpolationMethod)
+        : float option =
         match method_ with
         | InterpolationMethod.Linear -> LinearInterpolation.eval x points
         | InterpolationMethod.Lagrange -> LagrangeInterpolation.eval x points
@@ -42,22 +55,26 @@ module StreamProcessor =
 
     let private emit (config: Config) (state: State) (isEof: bool) : State =
         match state.Points with
-        | [] | [_] -> state
+        | []
+        | [ _ ] -> state
         | pts ->
             let sorted = pts |> List.sortBy (fun p -> p.X)
+
             let startX =
                 match state.LastEmitted with
                 | None -> sorted.Head.X
                 | Some last -> last + config.Step
 
             let lastPoint = sorted |> List.last
-            let endX = 
-                if isEof then 
+
+            let endX =
+                if isEof then
                     lastPoint.X + 2.0 * config.Step
-                else 
+                else
                     lastPoint.X - config.Step
 
-            if startX > endX then state
+            if startX > endX then
+                state
             else
                 PointGenerator.generateRange startX endX config.Step
                 |> Seq.iter (fun xVal ->

@@ -12,6 +12,7 @@ module Parser =
         | [| x; y |] ->
             let style = NumberStyles.Float
             let culture = CultureInfo.InvariantCulture
+
             match Double.TryParse(x, style, culture), Double.TryParse(y, style, culture) with
             | (true, xv), (true, yv) -> Some { X = xv; Y = yv }
             | _ -> None
@@ -43,6 +44,7 @@ module Parser =
                     match Int32.TryParse args.[i + 1] with
                     | true, n when n > 1 -> windowSize <- n
                     | _ -> ()
+
                     i <- i + 2
                 else
                     i <- i + 1
@@ -50,18 +52,25 @@ module Parser =
                 if i + 1 < args.Length then
                     let style = NumberStyles.Float
                     let culture = CultureInfo.InvariantCulture
+
                     match Double.TryParse(args.[i + 1], style, culture) with
                     | true, s when s > 0.0 -> step <- s
                     | _ -> ()
+
                     i <- i + 2
                 else
                     i <- i + 1
-            | "-v" | "--verbose" ->
+            | "-v"
+            | "--verbose" ->
                 verbose <- true
                 i <- i + 1
             | _ -> i <- i + 1
 
-        let chosen = if List.isEmpty methods then [ InterpolationMethod.Linear ] else methods
+        let chosen =
+            if List.isEmpty methods then
+                [ InterpolationMethod.Linear ]
+            else
+                methods
 
         { Methods = chosen
           Step = step
