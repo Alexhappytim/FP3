@@ -8,11 +8,11 @@ open Xunit
 module ConsoleTests =
 
     let runProgram (args: string) (input: string) : string =
-        let workDir = 
+        let workDir =
             let testAssemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location
             let testDir = Path.GetDirectoryName(testAssemblyPath)
             Path.GetFullPath(Path.Combine(testDir, "..", "..", "..", ".."))
-        
+
         let psi =
             ProcessStartInfo(
                 FileName = "dotnet",
