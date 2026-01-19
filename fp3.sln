@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fp3", "fp3\fp3.fsproj", "{2BDFA8D1-E4C4-4105-B735-7A82747AAFEF}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fp3.Tests", "fp3.Tests\fp3.Tests.fsproj", "{7C332C3F-7CD4-4F9A-8E21-1FA0A0D3D6F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BDFA8D1-E4C4-4105-B735-7A82747AAFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BDFA8D1-E4C4-4105-B735-7A82747AAFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BDFA8D1-E4C4-4105-B735-7A82747AAFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BDFA8D1-E4C4-4105-B735-7A82747AAFEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C332C3F-7CD4-4F9A-8E21-1FA0A0D3D6F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C332C3F-7CD4-4F9A-8E21-1FA0A0D3D6F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C332C3F-7CD4-4F9A-8E21-1FA0A0D3D6F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C332C3F-7CD4-4F9A-8E21-1FA0A0D3D6F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

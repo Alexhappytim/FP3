@@ -1,0 +1,9 @@
+root = true
+
+[*.fs]
+indent_style = space
+indent_size = 4
+
+[*.fsproj]
+indent_style = space
+indent_size = 2

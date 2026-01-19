@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore /p:TreatWarningsAsErrors=true
+    
+    - name: Run tests
+      run: dotnet test --configuration Release --no-build --verbosity normal /p:TreatWarningsAsErrors=true
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Install Fantomas
+      run: dotnet tool install -g fantomas
+    
+    - name: Check format
+      run: fantomas --check .
+
+  format:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+    
+    - name: Install Fantomas
+      run: dotnet tool install -g fantomas
+    
+    - name: Format code
+      run: fantomas .
+    
+    - name: Check if formatting changed files
+      run: git diff --exit-code
+      continue-on-error: true

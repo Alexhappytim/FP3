@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="xunit" Version="2.6.6" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../fp3/fp3.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="InterpolationTests.fs" />
+        <Compile Include="ParserTests.fs" />
+        <Compile Include="ConsoleTests.fs" />
+    </ItemGroup>
+
+</Project>
